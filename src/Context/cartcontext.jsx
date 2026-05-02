@@ -59,7 +59,8 @@ export default function CartProvider({ children }) {
     const initialState = {
         cart: [],
         billing: 0,
-        loading:false
+        loading: false,
+        count:0
     }
     const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -77,7 +78,7 @@ export default function CartProvider({ children }) {
             if (userdata) {
                 const datac = await fetchurl("/cart", "", options);
                 dispatch({ type: "setcart", payload: datac });
-                navigate("/home");
+                // navigate("/home");
            
             }  
         }

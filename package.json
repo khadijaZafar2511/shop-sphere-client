@@ -12,11 +12,17 @@
   "dependencies": {
     "@headlessui/react": "^2.2.9",
     "@heroicons/react": "^2.2.0",
+    "@stripe/react-stripe-js": "^6.1.0",
+    "@stripe/stripe-js": "^9.1.0",
     "@tailwindcss/vite": "^4.1.18",
+    "js-cookie": "^3.0.5",
+    "lucide-react": "^1.8.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-hook-form": "^7.71.1",
     "react-router-dom": "^7.13.0",
+    "recharts": "^3.8.1",
+    "sonner": "^2.0.7",
     "tailwindcss": "^4.1.18"
   },
   "devDependencies": {

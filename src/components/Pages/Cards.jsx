@@ -12,14 +12,14 @@ export default function Cards({ data }) {
             className="h-full  w-full"
           />
         </div>
-        <div className="h-28 flex flex-col gap-1">
+        <div className="h-28 flex flex-col gap-0.5">
           <p className=" px-1 mt-2 text-sm text-gray-400">{`${data.tags[0] ? data.tags[0] : data.title} | ${data.tags[1] ? data.tags[1] : data.title}`}</p>
-          <h1 className=" px-1 lg:text-[15px] text-sm text-gray-600 ">
+          <h1 className=" px-1  font-semibold text-sm text-gray-600 ">
             {data.title}
           </h1>
 
           <div className="flex justify-between  items-center mb-3">
-            <p className=" px-1 text-[13px] text-gray-700 font-semibold">
+            <p className=" px-1 text-[13px] text-gray-700 font-bold">
               PKR {data.price}
             </p>
           </div>

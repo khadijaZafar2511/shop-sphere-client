@@ -1,7 +1,7 @@
 import {useRef,useContext} from "react";
 import Cardlist from "./Cardlist";
 import Cardinfochild from "./Cardinfochild";
-import { GlobalContext } from "../Context/context1";
+import { GlobalContext } from "../../Context/context1";
 import { useParams } from "react-router-dom";
 export default function cardinfo() {
 
@@ -12,13 +12,11 @@ export default function cardinfo() {
   const { id } = useParams();
   
  const scrollLeft = () => {
-   // Increase scrollLeft by a set amount (e.g., 300px)
    if (scrollleft.current) {
      scrollleft.current.scrollLeft += 300;
    }
  };
  const scrollRight = () => {
-   // Increase scrollLeft by a set amount (e.g., 300px)
    if (scrollleft.current) {
      scrollleft.current.scrollLeft -= 300;
    }

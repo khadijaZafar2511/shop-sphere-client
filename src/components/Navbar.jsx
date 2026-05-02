@@ -11,7 +11,7 @@ export default function Navbar() {
   }
   const myvar = useContext(GlobalContext);
   const { state, dispatch } = myvar;
-  const { count } = state;
+  // const { count } = state;
   const navigate = useNavigate();
   const handleinput = (e) => {
     setInput(e.target.value);
@@ -29,8 +29,8 @@ export default function Navbar() {
 
   return (
     <>
-      <header className=" h-16 w-full bg-gray-800 text-gray-200 overflow-x-hidden  ">
-        <nav className="h-16 w-full bg-gray-800 flex  px-3 ">
+      <header className=" h-16 w-full bg-gray-800 text-gray-200 overflow-x-hidden ">
+        <nav className="h-16 w-full bg-gray-800 flex px-3 ">
           <div className="  h-full lg:w-1/3 w-2/3 md:w-1/3 sm:w-1/3  flex items-center justify-start  ">
             <div
               onClick={toggleHandle}
@@ -47,7 +47,7 @@ export default function Navbar() {
           </div>
           <div
             onClick={toggleHandle}
-            className={` absolute left-0 ${state1 ? "top-16" : "-top-full"} z-50 bg-gray-800 lg:w-22/24 w-full h-50 lg:h-16 lg:static  lg:flex  ml-0 lg:ml-6`}
+            className={` absolute left-0 ${state1 ? "top-16" : "-top-full"} z-50 bg-gray-800 lg:w-22/24 w-full h-50 lg:h-16  lg:static  lg:flex  ml-0 lg:ml-6`}
           >
             <ul
               className="flex flex-col items-center justify-center gap-3 py-7 lg:[&>*:hover]:border-blue-400 lg:[&>*:hover]:rounded lg:[&>*:hover]:border-t-3 lg:[&>*:hover]:border-b-3
@@ -73,7 +73,7 @@ export default function Navbar() {
             </div>
           </div>
           <div
-            className={`h-16 w-full flex items-center justify-center lg:hidden md:hidden sm:hidden fixed top-16 left-0 bg-gray-800`}
+            className={`h-16 w-full flex items-center justify-center lg:hidden md:hidden sm:hidden absolute top-16 left-0 bg-gray-800`}
           >
             <input
               onInput={handleinput}
@@ -104,7 +104,7 @@ export default function Navbar() {
               >
                 <img src="/shopping-cart.png " className="w-auto h-9 " />
                 <h1 className="flex items-center justify-end text-[15px] ">
-                  Cart({count})
+                  Cart
                 </h1>
               </Link>
             </div>

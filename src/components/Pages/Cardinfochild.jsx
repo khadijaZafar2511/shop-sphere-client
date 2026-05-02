@@ -1,17 +1,21 @@
 
 import { useContext, useState,  useEffect } from "react";
-import {  Link,useNavigate } from "react-router-dom";
-import { fetchurl } from "../Services/Productservice";
-import { CartContext } from "../Context/cartcontext";
-import { AuthContext } from "../Context/authcontext";
-import { PopupContext } from "../Context/popupcontext";
-import Popupmodel from "./Popupmodel";
-export default function Cardinfochild({p}) {
+import {  Link,useNavigate,useLocation } from "react-router-dom";
+import { fetchurl } from "../../Services/Productservice";
+import { CartContext } from "../../Context/cartcontext";
+import { AuthContext } from "../../Context/authcontext";
+import { PopupContext } from "../../Context/popupcontext";
+import Popupmodel from "../Popupmodel";
+import { toast } from "sonner";
+export default function Cardinfochild({ p }) {
   const { userdata } = useContext(AuthContext) 
   const {state ,dispatch2}=useContext(PopupContext)
 const [qnty, setQnty] = useState(1);
   const myvar = useContext(CartContext)
-  const {  dispatch } = myvar;
+  const { dispatch } = myvar;
+  const navigate = useNavigate();
+  const location = useLocation()
+  const redirectpath = location.pathname;
   const [form, setForm] = useState({
     productid: null,
       quantity: 1,
@@ -40,14 +44,25 @@ const [qnty, setQnty] = useState(1);
                 id: p._id,
                 qnty1: qnty,
               }));
+                toast.dismiss();
+    toast("Product added successfully!");
     }
     else {
-      alert("You have not login yet")
+      // alert("You have not login yet")
+      toast("You have not login yet!")
       dispatch2({ type: "setOpen", payload: true })
         dispatch2({ type: "setLogin", payload: true });
     }
         
-    };
+  };
+  
+  const buynowHandler = () => {
+   if (!userdata)
+   {
+      // dispatch2({ type: "setOpen", payload: true });
+      // dispatch2({ type: "setLogin", payload: true });
+   }
+ }
     
      useEffect(() => {
          setForm({
@@ -57,11 +72,11 @@ const [qnty, setQnty] = useState(1);
      }, [qnty]);
   return (
     <>
-      {state.open && <Popupmodel />}
+      {state.open && <Popupmodel prop={ redirectpath} />}
       <div
         id="main"
         key={p._id}
-        className="flex lg:flex-row md:flex-row sm:flex-row flex-col lg:gap-3   w-full h-screen   overflow-y-auto md:overflow-y-auto sm:overflow-y-visible lg:overflow-y-visible"
+        className="flex lg:flex-row md:flex-row sm:flex-row flex-col lg:gap-3   w-full h-screen "
       >
         <div className="lg:h-full lg:w-1/2 md:h-full md:w-1/2  sm:h-full sm:w-1/2 h-4/7 w-full flex  justify-center  lg:mt-13 md:mt-13 sm:mt-10   mt-2">
           <div className=" h-full lg:grid lg:grid-cols-1 lg:*:w-30  lg:*:h-40 *:mt-1 md:hidden sm:hidden  *:bg-radial *:from-[#c7c1B4] *:via-[#C4BEB0] *:to-[#9F9888] overflow-y-scroll  [&::-webkit-scrollbar]:w-1    [&::-webkit-scrollbar-track]:bg-gray-100  [&::-webkit-scrollbar-thumb]:bg-gray-500  [&::-webkit-scrollbar-thumb]:rounded-none  overflow-x-hidden">
@@ -109,7 +124,7 @@ const [qnty, setQnty] = useState(1);
             <p className=" px-1 mt-1 text-[13px] text-gray-700 ">
               SKU: 1-26-130-A-E
             </p>
-            <div className=" flex flex-col md:w-2/3 w-full gap-2 border-t border-gray-200 shadow shadow-gray-300  md:ml-7 fixed z-50 left-0 bottom-0 bg-white">
+            <div className=" flex flex-col md:w-2/3 w-full gap-2 border-t border-gray-200 md:border-none md:shadow-none shadow shadow-gray-300  md:ml-7  md:static fixed z-50 left-0 bottom-0 bg-white">
               <button
                 onClick={carthandler}
                 className=" border rounded-4xl md:px-12 px-5 py-3  text-[15px] text-white bg-gray-800 hover:bg-gray-900 transform active:scale-95 transition-all shadow-md mt-7  "
@@ -129,7 +144,7 @@ const [qnty, setQnty] = useState(1);
                 }}
                 className=" border rounded-4xl px-12 py-3 mb-2 text-[15px] text-white bg-blue-500 hover:bg-blue-600 transform active:scale-95 transition-all shadow-md text-center"
               >
-                <button>BUY NOW</button>
+                <button onClick={buynowHandler}>BUY NOW</button>
               </Link>
             </div>
             <div className="  lg:w-3/4 lg:h-4/5 md:w-5/6 md:h-4/5 sm:w-4/5 sm:h-1/3 w-full h-2/3 lg:ml-3 md:ml-3 sm:ml-3 px-2 border-t border-t-gray-400 mt-7 text-sm  flex flex-col gap-3 overflow-y-scroll  [&::-webkit-scrollbar]:w-1    [&::-webkit-scrollbar-track]:bg-gray-100  [&::-webkit-scrollbar-thumb]:bg-gray-500  [&::-webkit-scrollbar-thumb]:rounded-none ">

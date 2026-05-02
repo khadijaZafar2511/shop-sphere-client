@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { fetchurl } from "../Services/Productservice";
-
+import Cookies from "js-cookie";
  export const AuthContext = createContext();
  
 
@@ -11,30 +11,47 @@ export default function AuthProvider({ children }){
       method: "GET",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
-    };
+  };
+  
 
     useEffect(() => { 
-        try { 
-              const fetchuser = async () => {
-                  const userd = await fetch(
-                    "https://ecomerence-backened.onrender.com/me",
-                    options,
-                  );
-                const user = await userd.json();
-                if (user) {
-                  setUserdata(user);
+        
+      const fetchuser = async () => {
+        try {
+
+
+             const loggedInFlag = Cookies.get("isLoggedIn");
+
+             if (!loggedInFlag) {
+               // SILENT EXIT: No flag means guest. No 401 error in console!
+               setUserdata(null);
+               setLoading(false);
+               return;
+          }
+          
+          const userd = await fetch(
+            "http://localhost:3000/me",
+            options,
+          );
+          
+          if (userd.ok) {
+            const user = await userd.json();
+            setUserdata(user);
                  
-                } else {
-                  setUserdata(null);
-                }
-              };
-            fetchuser();
+          } else {
+            setUserdata(null);
+          }
+            
         } catch (err) {
-            console.error(err)
+          // console.error(err)
+          console.error("Auth fetch failed:", err);
+          setUserdata(null);
         } finally {
-             setLoading(false);
+          setLoading(false);
         }
-      
+       
+      } 
+       fetchuser();
     },[])
     return (
       <AuthContext.Provider value={{ userdata, setUserdata, loading }}>

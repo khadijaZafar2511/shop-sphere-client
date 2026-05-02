@@ -1,7 +1,7 @@
 import {fetchurl} from "../Services/Productservice";
 import { useEffect,useState } from "react";
 import { Link,useSearchParams} from "react-router-dom";
-import Cards from "./Cards"
+import Cards from "./Pages/Cards"
 
 
 export default function search() {

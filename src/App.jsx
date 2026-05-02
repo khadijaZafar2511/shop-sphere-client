@@ -1,23 +1,27 @@
-
+import { Elements } from "@stripe/react-stripe-js";
 import Navbar from "./components/Navbar";
-import Cartlist from "./components/Cartlist"
-import Cardinfo from "./components/Cardinfo";
-import {BrowserRouter ,Routes,Route} from "react-router-dom"
-import Home from "./components/Home"
-import Register from "./components/Register";
-import Login from "./components/Login";
-import Search from "./components/Search"
-import Order from "./components/Order"
+import Cartlist from "./components/Pages/Cartlist";
+import Cardinfo from "./components/Pages/Cardinfo";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./components/Pages/Home";
+import Register from "./components/Pages/Register";
+import Login from "./components/Pages/Login";
+import Search from "./components/Search";
+import Order from "./components/Pages/Order";
 import GlobalProvider from "./Context/context1";
 import CartProvider from "./Context/cartcontext";
 import PopupProvider from "./Context/popupcontext";
 import AuthProvider from "./Context/authcontext";
 import ProtectedRoute from "./components/Protectedroute";
 import Popupmodel from "./components/Popupmodel";
-import Orderpage from "./components/Orderpage"
+import Orderpage from "./components/Pages/Orderpage";
+import Payment from "./components/Pages/Payment";
+import PaymentSuccess from "./components/Pages/PaymentSuccess";
+import PaymentFail from "./components/Pages/PaymentFail";
+import Admin from "./components/Pages/Admin";
 // import OrderHistory from "./components/Orderitem"
 function App() {
-
+  // const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
   return (
     <>
       <BrowserRouter>
@@ -25,6 +29,7 @@ function App() {
           <CartProvider>
             <PopupProvider>
               <GlobalProvider>
+                {/* <Elements stripe={stripePromise} > */}
                 <Navbar />
                 <Routes>
                   <Route path="/" element={<Home />} />
@@ -34,8 +39,19 @@ function App() {
                   <Route path="/home" element={<Home />} />
                   <Route path="/search" element={<Search />} />
                   <Route path="/home/cardinfo/:id" element={<Cardinfo />} />
-                  <Route path="/orderpage" element={<Orderpage />} />
-                   {/* <Route path="/orderh" element={<OrderHistory/>} /> */}
+                  <Route
+                    path="/orderpage"
+                    element={
+                      <ProtectedRoute>
+                        <Orderpage />
+                      </ProtectedRoute>
+                    }
+                  />
+                  {/* <Route path="/orderh" element={<OrderHistory/>} /> */}
+                  <Route path="/payment" element={<Payment />} />
+                  <Route path="/paymentSuccess" element={<PaymentSuccess />} />
+                  <Route path="/paymentFail" element={<PaymentFail />} />
+                  <Route path="/admin" element={<Admin />} />
                   <Route
                     path="/order"
                     element={
@@ -53,6 +69,7 @@ function App() {
                     }
                   />
                 </Routes>
+                {/* </Elements> */}
               </GlobalProvider>
             </PopupProvider>
           </CartProvider>

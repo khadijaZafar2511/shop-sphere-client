@@ -1,65 +1,78 @@
 
-import { useContext, useState } from "react";
-import { AuthContext } from "../Context/authcontext";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../Context/authcontext";
 import { useNavigate } from "react-router-dom";
-import { PopupContext } from "../Context/popupcontext";
-export default function Login() {
-
+import { PopupContext } from "../../Context/popupcontext";
+import { toast } from "sonner";
+export default function Login({ prop }) {
   const navigate = useNavigate();
-  const {  setUserdata } = useContext(AuthContext)
-  const { state, dispatch2 } = useContext(PopupContext)
-  
-    const [logindata, setLogindata] = useState({ 
-        email: "",
-        password:""
-    })
-    const handleChange = (e) => {
-        setLogindata({ ...logindata, [e.target.name]: (e.target.value) })
-      
-  }
-    const handleSubmit =async (e) => {
-        e.preventDefault();
+  const { userdata,setUserdata } = useContext(AuthContext);
+  const { state, dispatch2 } = useContext(PopupContext);
+  const [logindata, setLogindata] = useState({
+    email: "",
+    password: "",
+  });
+  const handleChange = (e) => {
+    setLogindata({ ...logindata, [e.target.name]: e.target.value });
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-        const res = await fetch(
-          "https://ecomerence-backened.onrender.com/auth/login",
-// "http://localhost:3000/auth/login",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            credentials: "include",
-            body: JSON.stringify(logindata),
-          },
-        );
-    
-      if (res.ok) {
-        const data = await res.json();
-        setUserdata(data)
-            alert("login sucessfully")
-             navigate("/home") 
-      } 
-      else {
-        alert("login failed ") 
+    const res = await fetch(
+      "https://ecomerence-backened.onrender.com/auth/login",
+      // "http://localhost:3000/auth/login",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify(logindata),
+      },
+    );
+
+    if (res.ok) {
+      const data = await res.json();
+      setUserdata(data);
+      if (prop) {
+        navigate(prop, { replace: true });
+     toast("Login successfully!")
       }
-  }
+      navigate("/");
+ 
+    } else {
+      toast("Login failed!")
+    }
+  };
+
+
+
+
+  useEffect(() => {
+    if (userdata && prop) {
+       navigate(prop, { replace: true });
+   
+    }
+
+  }, [prop, userdata])
+  
+
   const navigateHandler = () => {
-  navigate("/register")
-}
+    navigate("/register");
+  };
   const crossHandle = () => {
     if (state.open) {
       dispatch2({ type: "setOpen", payload: false });
-         dispatch2({ type: "setRegister", payload: false });
-         dispatch2({ type: "setLogin", payload: false });
+      dispatch2({ type: "setRegister", payload: false });
+      dispatch2({ type: "setLogin", payload: false });
     }
-
-}
-   const togglePopup = () => {
+  };
+  const togglePopup = () => {
     if (state.islogin) {
-      dispatch2({ type: "setRegister", payload: true})
-      dispatch2({type:"setLogin",payload:false})
+      dispatch2({ type: "setRegister", payload: true });
+      dispatch2({ type: "setLogin", payload: false });
     }
-  }
+  };
   return (
     <>
       <div className="flex items-center justify-center min-h-screen   px-4">

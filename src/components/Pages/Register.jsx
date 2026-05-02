@@ -1,6 +1,7 @@
 import { useState ,useContext} from "react";
-import { PopupContext } from "../Context/popupcontext";
+import { PopupContext } from "../../Context/popupcontext";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 export default function Register() {
 
   const navigate=useNavigate()
@@ -22,7 +23,8 @@ const{state,dispatch2}=useContext(PopupContext)
  const handlesubmit = async (e) => {
         e.preventDefault()
      const res = await fetch(
-       "https://ecomerence-backened.onrender.com/auth/register",
+        "https://ecomerence-backened.onrender.com/auth/register",
+      //  "http://localhost:3000/auth/register",
        {
          method: "POST",
          headers: {
@@ -34,9 +36,9 @@ const{state,dispatch2}=useContext(PopupContext)
      );
    const data = await res.json()
         if (res.ok) {
-            alert("registration successfull") 
+           toast("Register successfully!")
           window.location.href="/login"   }
-        else alert("registration failed")
+        else toast("Registration failed!")
   }
 
   const navigateHandler = () => {
@@ -131,7 +133,8 @@ const{state,dispatch2}=useContext(PopupContext)
                   name="role"
                   onChange={handleChange}
                   className="w-full px-3 py-2 mt-1 border border-gray-400 rounded-md focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
-                >
+                defaultValue={User}
+              >
                   <option value="user">User</option>
                   <option value="admin">Admin</option>
                 </select>

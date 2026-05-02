@@ -1,18 +1,13 @@
 import { useContext } from "react";
 import { Navigate } from "react-router-dom";
 import { AuthContext } from "../Context/authcontext"; // adjust path to your context
-
+import { toast } from "sonner";
 const ProtectedRoute = ({ children }) => {
   const { userdata, loading } = useContext(AuthContext);
-
-  // 1. If we are still checking the cookie, show nothing or a spinner
-  if (loading) {
-    return <div className="loading">Checking session...</div>;
-  }
-
-  // 2. If the check is done and there's no user, send them to Login
     if (!userdata) {
-      alert("You have not login yet !")
+      // alert("You have not login yet !"
+      toast.dismiss();
+      toast("You have ot login yet!")
     return <Navigate to="/login" replace />;
   }
 

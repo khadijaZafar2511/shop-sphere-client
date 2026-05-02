@@ -23,7 +23,6 @@ export const GlobalContext = createContext();
   
 export default function GlobalProvider({ children }) {
       const initialState = {
-        count: 0,
           data: "",
           loading: true,
         value: {

@@ -14,7 +14,7 @@ export default function Modal({ props }) {
   //  const showpopup = () => {};
     
   return createPortal(
-    <div1 className=" min-h-screen  fixed inset-0 z-50 bg-black/50 backdrop-blur-sm py-4 px-4 lg:px-30 md:px-4 sm:px-4 overflow-x-hidden">
+    <div className=" min-h-screen  fixed inset-0 z-50 bg-black/50 backdrop-blur-sm py-4 px-4 lg:px-30 md:px-4 sm:px-4 overflow-x-hidden">
       <div className=" max-h-[95dvh] p-8 rounded-xl shadow-lg space-y-9 text-left bg-white overflow-y-auto ">
         <h2 className="text-2xl font-bold text-gray-800 border-b pb-4">
           User Profile
@@ -104,7 +104,7 @@ export default function Modal({ props }) {
           </button>
         </div>
       </div>
-    </div1>,
+    </div>,
     document.body,
   );
 
