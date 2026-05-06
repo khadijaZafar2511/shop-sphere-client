@@ -33,7 +33,7 @@ const[saveddata,setSaveddata]=useState("")
       "Content-Type": "application/json",
     },
     credentials: "include",
-    body: JSON.stringify({ saveinfo, productArray }),
+    body: JSON.stringify({ saveddata, productArray }),
   };
 
   const handlerOrder = async (e) => {
@@ -54,7 +54,7 @@ const[saveddata,setSaveddata]=useState("")
     e.preventDefault();
     if (formdata) {
       setSaveinfo(formdata);
-      // setSaveddata(JSON.parse(localStorage.getItem("data")));
+      
     }
   };
   const editHandler = () => {
@@ -65,15 +65,15 @@ const[saveddata,setSaveddata]=useState("")
 
   
 useEffect(() => {
-  // 1. Guard against SSR: Only run in the browser
+ 
   if (typeof window !== 'undefined') {
     
-    // 2. Only save if saveinfo actually has a value
+  
     if (saveinfo) {
       localStorage.setItem("data", JSON.stringify(saveinfo));
     }
 
-    // 3. Load from storage Safely
+  
     const saved = localStorage.getItem("data");
     if (saved) {
       try {
@@ -85,18 +85,7 @@ useEffect(() => {
   }
 }, [saveinfo]); 
   
-  
-//   useEffect(() => {
-//     if (saveinfo) {
-//             localStorage.setItem("data", JSON.stringify(saveinfo));      
-//     }
-// const saved = localStorage.getItem("data");
-// if (saved) {
-//   setSaveddata(JSON.parse(saved));
-// }
- 
-//   }, [saveinfo , saveddata]);
-console.log(saveddata)
+// console.log(saveddata.address)
   return (
     <>
       <div className=" min-h-screen bg-gray-100 py-4 px-4 lg:px-15 md:px-2 sm:px-4 grid grid-cols-1  md:grid-cols-6  gap-5 mt-15 sm:mt-10">

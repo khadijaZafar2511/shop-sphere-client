@@ -67,15 +67,21 @@ export default function Payment() {
     const amount = 50;
       const stripeSelect = async () => {
         try {
-          const response = await fetch("http://localhost:3000/payment", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ amount }),
-            credentials: "include",
-          });
+          // const response = await fetch("http://localhost:3000/payment", {
+           const response = await fetch(
+             "https://ecomerence-backened.onrender.com/payment",
+             {
+               method: "POST",
+               headers: { "Content-Type": "application/json" },
+               body: JSON.stringify({ amount }),
+               credentials: "include",
+             },
+           );
           const data = await response.json();
           setClientSecrete(data.clientSecrete);
         } catch (err) {
+          console.log(err.stack)
+          console.log(err)
           alert("Stripe initialization failed");
         }
     };
