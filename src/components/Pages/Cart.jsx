@@ -37,6 +37,7 @@ export default function Cart({ cartc }) {
 
   // update handler
   const updatehandler = async (nextqnty) => {
+   
     const options2 = {
       method: "PATCH",
       headers: {
@@ -50,6 +51,7 @@ export default function Cart({ cartc }) {
       "",
       options2,
     );
+      
     if (putdata) {
       dispatch({
         type: "updatevalue",

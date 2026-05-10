@@ -29,7 +29,7 @@ export default function Navbar() {
 
   return (
     <>
-      <header className=" h-16 w-full bg-gray-800 text-gray-200 overflow-x-hidden ">
+      <header className=" h-16 w-full bg-gray-800 text-gray-200 overflow-x-hidden overscroll-x-none">
         <nav className="h-16 w-full bg-gray-800 flex px-3 ">
           <div className="  h-full lg:w-1/3 w-2/3 md:w-1/3 sm:w-1/3  flex items-center justify-start  ">
             <div

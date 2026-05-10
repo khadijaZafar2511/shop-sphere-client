@@ -19,6 +19,8 @@ import Payment from "./components/Pages/Payment";
 import PaymentSuccess from "./components/Pages/PaymentSuccess";
 import PaymentFail from "./components/Pages/PaymentFail";
 import Admin from "./components/Pages/Admin";
+import FrontPage from "./components/Pages/FrontPage";
+import  ProductsBYCategory from "./components/Pages/ProductsBYCategory"
 // import OrderHistory from "./components/Orderitem"
 function App() {
   // const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
@@ -32,7 +34,8 @@ function App() {
                 {/* <Elements stripe={stripePromise} > */}
                 <Navbar />
                 <Routes>
-                  <Route path="/" element={<Home />} />
+                  <Route path="/" element={<FrontPage />} />
+                  <Route path="/:category" element={<ProductsBYCategory />} />
                   <Route path="/pop" element={<Popupmodel />} />
                   <Route path="/login" element={<Login />} />
                   <Route path="/register" element={<Register />} />

@@ -2,11 +2,12 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Context/authcontext";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 import { PopupContext } from "../../Context/popupcontext";
 import { toast } from "sonner";
 export default function Login({ prop }) {
   const navigate = useNavigate();
-  const { userdata,setUserdata } = useContext(AuthContext);
+  const { userdata, setUserdata, setLoggedInFlag,loggedInFlag } = useContext(AuthContext);
   const { state, dispatch2 } = useContext(PopupContext);
   const [logindata, setLogindata] = useState({
     email: "",
@@ -37,8 +38,9 @@ export default function Login({ prop }) {
       setLoggedInFlag(Cookies.get("isLoggedIn"));
       if (prop) {
         navigate(prop, { replace: true });
-     toast("Login successfully!")
+   
       }
+        toast("Login successfully!");
       navigate("/");
  
     } else {
@@ -50,12 +52,11 @@ export default function Login({ prop }) {
 
 
   useEffect(() => {
-    if (userdata && prop) {
-       navigate(prop, { replace: true });
-   
+    if (userdata || loggedInFlag) {
+      navigate("/");
     }
 
-  }, [prop, userdata])
+  }, [loggedInFlag, userdata])
   
 
   const navigateHandler = () => {

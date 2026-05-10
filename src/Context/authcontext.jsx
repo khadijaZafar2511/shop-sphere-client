@@ -13,7 +13,7 @@ const [loggedInFlag ,setLoggedInFlag]=useState(null)
       headers: { "Content-Type": "application/json" },
       credentials: "include",
   };
-console.log(Cookies.get("isLoggedIn"))
+// console.log(Cookies.get("isLoggedIn"))
 
     useEffect(() => { 
         
@@ -22,8 +22,8 @@ console.log(Cookies.get("isLoggedIn"))
 
 
           setLoggedInFlag(Cookies.get("isLoggedIn"));
-          console.log(Cookies.get("isLoggedIn"));
-console.log(loggedInFlag)
+          // console.log(Cookies.get("isLoggedIn"));
+// console.log(loggedInFlag)
              if (!loggedInFlag) {
                // SILENT EXIT: No flag means guest. No 401 error in console!
                setUserdata(null);
@@ -56,7 +56,7 @@ console.log(loggedInFlag)
        fetchuser();
     },[loggedInFlag])
     return (
-      <AuthContext.Provider value={{ userdata, setUserdata, loading  , setLoggedInFlag}}>
+      <AuthContext.Provider value={{ userdata, setUserdata, loading  , setLoggedInFlag,loggedInFlag}}>
         { children }
         </AuthContext.Provider>
     );

@@ -23,7 +23,7 @@ function reducer (state,action) {
                updatedcart=  [...state.cart, action.payload]
              return {
                     ...state,
-                    cart: updatedcart,
+                    cart: updatedcart || [],
                    billing:updatedcart.reduce((total,item)=>total+(item.product.price*item.quantity),0)
                 }
         case "deletecart":
@@ -32,7 +32,7 @@ function reducer (state,action) {
             );
             return {
                 ...state,
-                cart: filteredcart,
+                cart: filteredcart || [],
                 billing :filteredcart.reduce((total , item)=>total+(item.product.price*item.quantity),0)
             }
         case "updatevalue":
@@ -43,7 +43,7 @@ function reducer (state,action) {
             );
             return {
                 ...state,
-                cart: uvcart,
+                cart: uvcart || [],
                 quantity: uvcart.reduce((total, item)=>total+(item.product.price*item.quantity),0)
              
             }
@@ -77,7 +77,11 @@ export default function CartProvider({ children }) {
             if (loading) return null;
             if (userdata) {
                 const datac = await fetchurl("/cart", "", options);
-                dispatch({ type: "setcart", payload: datac });
+               
+                if (datac) {
+                   
+                     dispatch({ type: "setcart", payload: datac });
+                }
                 // navigate("/home");
            
             }  

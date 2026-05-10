@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { fetchurl } from "../../Services/Productservice";
 export default function Cartlist() {
   const myvar = useContext(CartContext);
+  if (!myvar) return null;
   const { state, dispatch } = myvar;
   const { cart } = state;
 

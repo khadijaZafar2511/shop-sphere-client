@@ -12,6 +12,7 @@ export default function Cardinfochild({ p }) {
   const {state ,dispatch2}=useContext(PopupContext)
 const [qnty, setQnty] = useState(1);
   const myvar = useContext(CartContext)
+//  console.log(myvar)
   const { dispatch } = myvar;
   const navigate = useNavigate();
   const location = useLocation()
@@ -21,6 +22,7 @@ const [qnty, setQnty] = useState(1);
       quantity: 1,
     billing:0
   });
+ 
        const options = {
          method: "POST",
          headers: {

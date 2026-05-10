@@ -19,19 +19,20 @@ export default function Cardlist() {
 
   return (
     <>
-      {data &&
-        data.map((p) => (
-          <Link
-            to={`/home/cardinfo/${p.id}`}
-            className="flex items-center mb-3  hover:scale-102   w-25/26"
-            onClick={() => {
-              scrollTop();
-            }}
-            key={p.id}
-          >
-            <Cards data={p} />
-          </Link>
-        ))}
+      {data &&  data.map((p) => (
+                       <Link
+                         to={`/home/cardinfo/${p.id}`}
+                         className="flex items-center mb-3  hover:scale-102   w-25/26"
+                         onClick={() => {
+                           scrollTop();
+                         }}
+                         key={p.id}
+                       >
+                         <Cards data={p} />
+                       </Link>
+                     ))
+                 
+     }
     </>
   );
 }
