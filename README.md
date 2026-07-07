@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="(https://ecomerence-website-six.vercel.app/)" target="_blank">
-    <img src="https://shields.io⚡_Visit_Site-Success?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Demo" />
+    Live Demo
   </a>
 </p>
 
