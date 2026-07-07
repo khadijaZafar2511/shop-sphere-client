@@ -1,13 +1,4 @@
 # 🛒 ShopSphere | Modern E-Commerce Frontend
-
-<p align="center">
-  <a href="(https://ecomerence-website-six.vercel.app/)" target="_blank">
-    Live Demo
-  </a>
-</p>
-
-
-
 ---
 
 ### 🚀 Overview
